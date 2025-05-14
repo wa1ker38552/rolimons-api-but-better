@@ -126,6 +126,9 @@ def update_rap():
         if item in history:
             if data[item]['rap'] != history[item][-1][1]:
                 history[item].append([round(time.time()), data[item]['rap']])
+
+                if len(history[item]) > 50:
+                    history[item] = history[item][-50:]
                 i += 1
     with open('data/rap.json', 'w') as file:
         ujson.dump(history, file)
