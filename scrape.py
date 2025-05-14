@@ -133,5 +133,5 @@ def update_rap():
     with open('data/rap.json', 'w') as file:
         ujson.dump(history, file)
     print(f'Updated {i} items')
-    return time.time()
+    return time.time(), data, history
 

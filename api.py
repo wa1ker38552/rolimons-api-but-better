@@ -9,11 +9,11 @@ import json
 import time
 
 def update_thread():
-    global last_updated
+    global last_updated, meta_cache, history_cache
     while True:
         time.sleep(60)
         try:
-            last_updated = update_rap()
+            last_updated, meta_cache, history_cache = update_rap()
         except Exception as e:
             print('Error while updating', e)
         
@@ -23,6 +23,10 @@ app = Flask(__name__)
 @app.route('/')
 def app_index():
     return render_template('index.html', last_updated=last_updated)
+
+@app.route('/last_updated')
+def api_last_updated():
+    return str(last_updated)
 
 @app.route('/api/item')
 def api_item():
